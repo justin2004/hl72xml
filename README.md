@@ -1,6 +1,12 @@
 Hl72xml
 =======
 
+Get right to it
+===
+
+See [Examples](EXAMPLES.md) if you want to see input and output examples to know if this project is worth your time.
+
+
 Introduction
 ====
 
