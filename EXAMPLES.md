@@ -1,0 +1,564 @@
+## example 1
+
+input (from sendHL7.py) 
+
+```
+mensaje  =  "MSH|^~\&|Xxxxx|SENDING|RECEIVING FACILITY|20101223202939-0400||ADT^A40|102|P|2.3.1||||||||\n"
+mensaje +=  "EVN|A40|20101223202939-0400||||\n"
+mensaje +=  "PID||P12345^^^ISSUER|P12345^^^ISSUER||PATIENT^TEST^M^^^^||19741018|M|||10808 FOOTHILL BLVD^^Francisco Mucamonga^CA^91730^US||(909)481-5872^^^sales@Xxxx.com|(909)481-5800x1||M||12345|286-50-9510|||\n"
+mensaje +=  "MRG|758026^^^ISSUER|||758026^^^ISSUER|\n"
+```
+
+
+output
+```
+<?xml version="1.0"?>
+<segments>
+  <segment>
+    <MSH>
+      <fields>
+        <field>
+          <value/>
+          <value>
+            <subcomponents>
+              <subcomponent>\\</subcomponent>
+            </subcomponents>
+          </value>
+        </field>
+        <field>
+          <value>Xxxxx</value>
+        </field>
+        <field>
+          <value>SENDING</value>
+        </field>
+        <field>
+          <value>RECEIVING FACILITY</value>
+        </field>
+        <field>
+          <value>20101223202939-0400</value>
+        </field>
+        <field>
+          <value/>
+        </field>
+        <field>
+          <value>
+            <components>
+              <component>ADT</component>
+              <component>A40</component>
+            </components>
+          </value>
+        </field>
+        <field>
+          <value>102</value>
+        </field>
+        <field>
+          <value>P</value>
+        </field>
+        <field>
+          <value>2.3.1</value>
+        </field>
+      </fields>
+    </MSH>
+  </segment>
+  <segment>
+    <EVN>
+      <fields>
+        <field>
+          <value>A40</value>
+        </field>
+        <field>
+          <value>20101223202939-0400</value>
+        </field>
+      </fields>
+    </EVN>
+  </segment>
+  <segment>
+    <PID>
+      <fields>
+        <field>
+          <value/>
+        </field>
+        <field>
+          <value>
+            <components>
+              <component>P12345</component>
+              <component/>
+              <component/>
+              <component>ISSUER</component>
+            </components>
+          </value>
+        </field>
+        <field>
+          <value>
+            <components>
+              <component>P12345</component>
+              <component/>
+              <component/>
+              <component>ISSUER</component>
+            </components>
+          </value>
+        </field>
+        <field>
+          <value/>
+        </field>
+        <field>
+          <value>
+            <components>
+              <component>PATIENT</component>
+              <component>TEST</component>
+              <component>M</component>
+            </components>
+          </value>
+        </field>
+        <field>
+          <value/>
+        </field>
+        <field>
+          <value>19741018</value>
+        </field>
+        <field>
+          <value>M</value>
+        </field>
+        <field>
+          <value/>
+        </field>
+        <field>
+          <value/>
+        </field>
+        <field>
+          <value>
+            <components>
+              <component>10808 FOOTHILL BLVD</component>
+              <component/>
+              <component>Francisco Mucamonga</component>
+              <component>CA</component>
+              <component>91730</component>
+              <component>US</component>
+            </components>
+          </value>
+        </field>
+        <field>
+          <value/>
+        </field>
+        <field>
+          <value>
+            <components>
+              <component>(909)481-5872</component>
+              <component/>
+              <component/>
+              <component>sales@Xxxx.com</component>
+            </components>
+          </value>
+        </field>
+        <field>
+          <value>(909)481-5800x1</value>
+        </field>
+        <field>
+          <value/>
+        </field>
+        <field>
+          <value>M</value>
+        </field>
+        <field>
+          <value/>
+        </field>
+        <field>
+          <value>12345</value>
+        </field>
+        <field>
+          <value>286-50-9510</value>
+        </field>
+      </fields>
+    </PID>
+  </segment>
+  <segment>
+    <MRG>
+      <fields>
+        <field>
+          <value>
+            <components>
+              <component>758026</component>
+              <component/>
+              <component/>
+              <component>ISSUER</component>
+            </components>
+          </value>
+        </field>
+        <field>
+          <value/>
+        </field>
+        <field>
+          <value/>
+        </field>
+        <field>
+          <value>
+            <components>
+              <component>758026</component>
+              <component/>
+              <component/>
+              <component>ISSUER</component>
+            </components>
+          </value>
+        </field>
+      </fields>
+    </MRG>
+  </segment>
+</segments>
+```
+
+
+## example 2
+
+
+input  (also copied in sendHL7.py)
+```
+2.1 The V2.4 Message
+The V2.4 representation of the use-case is a ORU^R01 message. The syntax encoding is based on the classic HL7 v2 syntax, commonly referred to as the vertical-bar syntax. The MSH (Message Header) segment contains the message type, in this case, ORU^R01, which identifies the message type and the trigger event. The sender is the GHH Lab in ELAB-3. The receiving application is the GHH OE system located in BLDG4. The message was sent on 2002-02-15 at 09:30. The MSH segment is the initial segment of the message structure.
+
+ MSH|^~\&|GHH LAB|ELAB-3|GHH OE|BLDG4|200202150930||ORU^R01|CNTRL-3456|P|2.4<cr>
+ PID|||555-44-4444||EVERYWOMAN^EVE^E^^^^L|JONES|19620320|F|||153 FERNWOOD DR.^
+ ^STATESVILLE^OH^35292||(206)3345232|(206)752-121||||AC555444444||67-A4335^OH^20030520<cr>
+ OBR|1|845439^GHH OE|1045813^GHH LAB|15545^GLUCOSE|||200202150730|||||||||
+ 555-55-5555^PRIMARY^PATRICIA P^^^^MD^^|||||||||F||||||444-44-4444^HIPPOCRATES^HOWARD H^^^^MD<cr>
+ OBX|1|SN|1554-5^GLUCOSE^POST 12H CFST:MCNC:PT:SER/PLAS:QN||^182|mg/dl|70_105|H|||F<cr>
+
+The PID (Patient Identification) segment contains the demographic information of the patient. Eve E. Everywoman was born on 1962-03-20 and lives in Statesville OH. Her patient ID number (presumably assigned to her by the Good Health Hospital) is 555-44-4444.
+
+The OBR (Observation Request) segment identifies the observation as it was originally ordered: 15545^GLUCOSE. The observation was ordered by Particia Primary MD and performed by Howard Hippocrates MD.
+
+The OBX (Observation) segment contains the results of the observation: 182 mg/dl. 
+```
+from http://www.ringholm.com/docs/04300_en.htm
+
+
+output
+
+
+```
+<?xml version="1.0"?>
+<segments>
+  <segment>
+    <MSH>
+      <fields>
+        <field>
+          <value/>
+          <value>
+            <subcomponents>
+              <subcomponent>\\</subcomponent>
+            </subcomponents>
+          </value>
+        </field>
+        <field>
+          <value>GHH LAB</value>
+        </field>
+        <field>
+          <value>ELAB-3</value>
+        </field>
+        <field>
+          <value>GHH OE</value>
+        </field>
+        <field>
+          <value>BLDG4</value>
+        </field>
+        <field>
+          <value>200202150930</value>
+        </field>
+        <field>
+          <value/>
+        </field>
+        <field>
+          <value>
+            <components>
+              <component>ORU</component>
+              <component>R01</component>
+            </components>
+          </value>
+        </field>
+        <field>
+          <value>CNTRL-3456</value>
+        </field>
+        <field>
+          <value>P</value>
+        </field>
+        <field>
+          <value>2.4</value>
+        </field>
+      </fields>
+    </MSH>
+  </segment>
+  <segment>
+    <PID>
+      <fields>
+        <field>
+          <value/>
+        </field>
+        <field>
+          <value/>
+        </field>
+        <field>
+          <value>555-44-4444</value>
+        </field>
+        <field>
+          <value/>
+        </field>
+        <field>
+          <value>
+            <components>
+              <component>EVERYWOMAN</component>
+              <component>EVE</component>
+              <component>E</component>
+              <component/>
+              <component/>
+              <component/>
+              <component>L</component>
+            </components>
+          </value>
+        </field>
+        <field>
+          <value>JONES</value>
+        </field>
+        <field>
+          <value>19620320</value>
+        </field>
+        <field>
+          <value>F</value>
+        </field>
+        <field>
+          <value/>
+        </field>
+        <field>
+          <value/>
+        </field>
+        <field>
+          <value>
+            <components>
+              <component>153 FERNWOOD DR.</component>
+              <component/>
+              <component>STATESVILLE</component>
+              <component>OH</component>
+              <component>35292</component>
+            </components>
+          </value>
+        </field>
+        <field>
+          <value/>
+        </field>
+        <field>
+          <value>(206)3345232</value>
+        </field>
+        <field>
+          <value>(206)752-121</value>
+        </field>
+        <field>
+          <value/>
+        </field>
+        <field>
+          <value/>
+        </field>
+        <field>
+          <value/>
+        </field>
+        <field>
+          <value>AC555444444</value>
+        </field>
+        <field>
+          <value/>
+        </field>
+        <field>
+          <value>
+            <components>
+              <component>67-A4335</component>
+              <component>OH</component>
+              <component>20030520</component>
+            </components>
+          </value>
+        </field>
+      </fields>
+    </PID>
+  </segment>
+  <segment>
+    <OBR>
+      <fields>
+        <field>
+          <value>1</value>
+        </field>
+        <field>
+          <value>
+            <components>
+              <component>845439</component>
+              <component>GHH OE</component>
+            </components>
+          </value>
+        </field>
+        <field>
+          <value>
+            <components>
+              <component>1045813</component>
+              <component>GHH LAB</component>
+            </components>
+          </value>
+        </field>
+        <field>
+          <value>
+            <components>
+              <component>15545</component>
+              <component>GLUCOSE</component>
+            </components>
+          </value>
+        </field>
+        <field>
+          <value/>
+        </field>
+        <field>
+          <value/>
+        </field>
+        <field>
+          <value>200202150730</value>
+        </field>
+        <field>
+          <value/>
+        </field>
+        <field>
+          <value/>
+        </field>
+        <field>
+          <value/>
+        </field>
+        <field>
+          <value/>
+        </field>
+        <field>
+          <value/>
+        </field>
+        <field>
+          <value/>
+        </field>
+        <field>
+          <value/>
+        </field>
+        <field>
+          <value/>
+        </field>
+        <field>
+          <value>
+            <components>
+              <component>555-55-5555</component>
+              <component>PRIMARY</component>
+              <component>PATRICIA P</component>
+              <component/>
+              <component/>
+              <component/>
+              <component>MD</component>
+            </components>
+          </value>
+        </field>
+        <field>
+          <value/>
+        </field>
+        <field>
+          <value/>
+        </field>
+        <field>
+          <value/>
+        </field>
+        <field>
+          <value/>
+        </field>
+        <field>
+          <value/>
+        </field>
+        <field>
+          <value/>
+        </field>
+        <field>
+          <value/>
+        </field>
+        <field>
+          <value/>
+        </field>
+        <field>
+          <value>F</value>
+        </field>
+        <field>
+          <value/>
+        </field>
+        <field>
+          <value/>
+        </field>
+        <field>
+          <value/>
+        </field>
+        <field>
+          <value/>
+        </field>
+        <field>
+          <value/>
+        </field>
+        <field>
+          <value>
+            <components>
+              <component>444-44-4444</component>
+              <component>HIPPOCRATES</component>
+              <component>HOWARD H</component>
+              <component/>
+              <component/>
+              <component/>
+              <component>MD</component>
+            </components>
+          </value>
+        </field>
+      </fields>
+    </OBR>
+  </segment>
+  <segment>
+    <OBX>
+      <fields>
+        <field>
+          <value>1</value>
+        </field>
+        <field>
+          <value>SN</value>
+        </field>
+        <field>
+          <value>
+            <components>
+              <component>1554-5</component>
+              <component>GLUCOSE</component>
+              <component>POST 12H CFST:MCNC:PT:SER/PLAS:QN</component>
+            </components>
+          </value>
+        </field>
+        <field>
+          <value/>
+        </field>
+        <field>
+          <value>
+            <components>
+              <component/>
+              <component>182</component>
+            </components>
+          </value>
+        </field>
+        <field>
+          <value>mg/dl</value>
+        </field>
+        <field>
+          <value>70_105</value>
+        </field>
+        <field>
+          <value>H</value>
+        </field>
+        <field>
+          <value/>
+        </field>
+        <field>
+          <value/>
+        </field>
+        <field>
+          <value>F</value>
+        </field>
+      </fields>
+    </OBX>
+  </segment>
+</segments>
+```

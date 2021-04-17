@@ -1,12 +1,12 @@
 DIALYZER=dialyzer
-REBAR=./rebar
+REBAR=/usr/bin/rebar
 
 .PHONY: start
 
-compile: rebar src/*.erl
+compile: $(REBAR) src/*.erl
 	@$(REBAR) compile
 
-clean: rebar ebin
+clean: $(REBAR) ebin
 	@$(REBAR) clean
 	@rm -rf ebin
 
