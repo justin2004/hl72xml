@@ -37,6 +37,19 @@ Message HL7 example
 with this proyect you can convert HL7 message to xml format
 
 How to start
+===
+
+- Have docker and make installed
+- `make build`
+- `make run`
+- in another shell
+    - `make send`
+    - then you should see your hl7 message in xml printed to standard out
+- `make stop`
+
+
+
+How to start (original)
 ====
 
 Clone the project:

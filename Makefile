@@ -1,22 +1,12 @@
-DIALYZER=dialyzer
-REBAR=/usr/bin/rebar
+build:
+	docker build -t justin2004/hl72xml .
 
-.PHONY: start
+run: 
+	docker run --name hl72xml --rm -it justin2004/hl72xml make -f Makefile.app start
 
-compile: $(REBAR) src/*.erl
-	@$(REBAR) compile
+send:
+	docker exec -it hl72xml python python_src/sendHL7.py
 
-clean: $(REBAR) ebin
-	@$(REBAR) clean
-	@rm -rf ebin
+stop:
+	docker stop hl72xml
 
-start: ebin/*.beam
-	(erl -pa ebin -eval 'ok = application:start(hl72xml)')
-
-edoc:
-	@$(REBAR) doc
-
-dialyzer: ebin/*.beam
-	@$(DIALYZER) ebin/ --plt $(HOME)/.dialyzer_plt -Wunmatched_returns \
-    			        -Werror_handling -Wrace_conditions -Wbehaviours \
-     				-Wunderspecs
